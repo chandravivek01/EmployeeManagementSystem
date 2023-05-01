@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee Update Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+			
+				<form th:action="@{/employee/save}" th:object="${employee}" method="POST">
+					
+					<!-- Add hidden form field to handle update -->
+					<input type="hidden" name="id" th:field="*{id}" />
+						
+					<div class="form-group">
+						<label for="firstName" class="control-label">Employee First Name</label>
+						<input type="text" id="firstName" class="form-control" th:field="*{firstname}" required autofocus="autofocus" />
+					</div>
+					
+					<div class="form-group">
+						<label for="lastName" class="control-label">Employee Last Name</label>
+						<input type="text" id="lastName" class="form-control" th:field="*{lastname}" required autofocus="autofocus" />
+					</div>
+					
+					<div class="form-group">
+						<label for="email" class="control-label">Employee Email</label>
+						<input type="text" id="email" class="form-control" th:field="*{email}" required autofocus="autofocus" />
+					</div>	
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>

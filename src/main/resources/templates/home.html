@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<style type="text/css">
+#logout {
+	float: right;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		
+		<br>
+		<a href="/logout" id="logout" class="btn btn-primary btn-sm mb-3 mx-auto"> Logout </a> <br>
+		
+		<!--<h1>Welcome, <span sec:authentication="principal.username">User</span></h1> -->
+		
+		<a th:href="@{/employee/addemployee}" class="btn btn-primary">Add Employee</a> <br><br>
+		
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.firstname}" />
+					<td th:text="${employee.lastname}" />
+					<td th:text="${employee.email}" />
+					<td>
+						<div class="row">
+							
+							<div class="col-small">
+								<form th:action="@{/employee/update}" method="POST">
+									<input type="hidden" name="employeeId" th:value="${employee.id}" />
+									<button type="submit" class="btn btn-primary btn-sm ml-3 mr-1">Update</button>
+								</form>
+							</div>
+							
+							<div class="col-small">
+								<form th:action="@{/employee/delete}" method="POST">
+									<input type="hidden" name="employeeId" th:value="${employee.id}" />
+									<button type="submit" class="btn btn-danger btn-sm"
+										onclick="if (!(confirm('Are you sure you want to delete this ticket?'))) return false">Delete</button>
+								</form>
+							</div>
+						
+						</div>
+					</td>
+				</tr>				
+			</tbody>
+		
+		</table>
+
+
+
+
+
+	</div>
+
+</body>
+</html>
