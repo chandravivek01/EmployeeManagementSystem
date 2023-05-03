@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.g2b1.ems.service.UserService;
 
@@ -43,20 +42,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-//		http.authorizeRequests()
-//		.antMatchers("/employee/addemployee", "/employee/save", "/employee/update", "/employee/delete").hasAuthority("ADMIN")
-//		.antMatchers("/employee").hasAnyAuthority("USER", "ADMIN")
-//		.antMatchers("/registration/addrole", "/registration", "/registration/save").permitAll()
-//		.anyRequest().authenticated()
-//		.and()
-//		.formLogin().loginPage("/login").permitAll()
-//		.and()
-//		.logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//		.logoutSuccessUrl("/login?logout").permitAll()
-//		.and()
-//		.exceptionHandling().accessDeniedPage("/403")
-//		.and()
-//		.cors().and().csrf().disable();
+		http.authorizeRequests()
+		.antMatchers("/employee/addemployee", "/employee/save", "/employee/update", "/employee/delete").hasAuthority("ADMIN")
+		.antMatchers("/employee").hasAnyAuthority("USER", "ADMIN")
+		.antMatchers("/","/registration", "/registration/addrole", "/registration/save", "/employee/view", "/employee/search").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.formLogin().loginProcessingUrl("/login").successForwardUrl("/employee").permitAll()
+		.and()
+		.logout().logoutSuccessUrl("/registration").permitAll()
+		.and()
+		.exceptionHandling().accessDeniedPage("/403")
+		.and()
+		.cors().and().csrf().disable();
 
 		
 //		CONFIGURATION FOR TICKET-CONTROLLER APPLICATION
@@ -79,18 +77,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 //		CONFIGURATION FOR CUSTOM LOGIN BEFORE ADDING AUTHORIZATIONS FOR "ADMIN" AND "USER" (WITHOUT USER AND ADMIN AUTHORIZATION)
 		
-		http.authorizeRequests()
-		.antMatchers("/employee/addemployee", "/employee/save", "/employee/update", "/employee/delete").hasAuthority("ADMIN")
-		.antMatchers("/employee", "/registration/addrole","/registration", "/registration/save").permitAll()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin().loginPage("/login").permitAll()
-		.and()
-		.logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login?logout")
-		.permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/403");
+//		http.authorizeRequests()
+//		.antMatchers("/employee", "/registration/addrole","/registration", "/registration/save").permitAll()
+//		.antMatchers("/employee/addemployee", "/employee/save", "/employee/update", "/employee/delete").hasAuthority("ADMIN")
+//		.anyRequest().authenticated()
+//		.and()
+//		.formLogin().loginPage("/login").permitAll()
+//		.and()
+//		.logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//		.logoutSuccessUrl("/login?logout")
+//		.permitAll()
+//		.and()
+//		.exceptionHandling().accessDeniedPage("/403");
 	}
 
 }

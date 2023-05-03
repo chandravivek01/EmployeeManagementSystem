@@ -3,6 +3,8 @@ package com.g2b1.ems.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.g2b1.ems.entity.Employee;
@@ -28,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee findEmployeeById(long id) {
+	public Employee getEmployeeById(long id) {
 		
 		return employeeRepository.getById(id);
 	}
@@ -37,6 +39,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void removeEmployee(long id) {
 	
 		employeeRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Employee> sortEmployeesByFirstname(Direction direction) {
+		
+		return employeeRepository.findAll(Sort.by(direction, "firstname"));
 	}
 
 	

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Employee Update Form</title>
+<title>View Employee</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 			
-				<form th:action="@{/employee/save}" th:object="${employee}" method="POST">
+				<form th:object="${employee}" method="POST">
 					
 					<!-- Add hidden form field to handle update -->
 					<input type="hidden" name="id" th:field="*{id}" />
@@ -31,10 +31,6 @@
 						<label for="email" class="control-label">Employee Email</label>
 						<input type="text" id="email" class="form-control" th:field="*{email}" required autofocus="autofocus" />
 					</div>	
-					
-					<div class="form-group">
-						<button type="submit" class="btn btn-success">Save</button>
-					</div>
 					
 					<div class="form-group">
 						<a th:href="@{/employee}" class="btn btn-primary">Back</a>

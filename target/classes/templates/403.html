@@ -3,9 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Authorization</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 </head>
 <body>
-	<h1>HTTP Status 403 - Access is denied</h1>
-	<h2 th:text="${user.getName()}"></h2>
+	<div class="container">
+		<br>
+		<h1>HTTP Status 403 - Access is denied</h1>
+		<br>
+		<h4>Authorization denied for user: <span th:text="${user.getName()}"></span>!</h4>
+		<h4> You need to be an ADMIN</h4>
+		<br>
+		<br>
+		<a href="/logout" id="logout" class="btn btn-primary btn-sm mb-3 mx-auto"> Logout </a> <br>
+	</div>
+	
 </body>
 </html>

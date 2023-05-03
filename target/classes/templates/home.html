@@ -12,17 +12,36 @@
 #logout {
 	float: right;
 }
+/* #sort {
+	float: right;
+} */
+
 </style>
 </head>
 <body>
 	<div class="container">
 		
 		<br>
-		<a href="/logout" id="logout" class="btn btn-primary btn-sm mb-3 mx-auto"> Logout </a> <br>
+		
 		
 		<!--<h1>Welcome, <span sec:authentication="principal.username">User</span></h1> -->
+		<h3>Welcome, <span th:text="${user}"></span><a href="/logout" id="logout" class="btn btn-primary btn-sm mb-3 mx-auto"> Logout </a> <br></h3>
+		<a th:href="@{/employee}" class="btn btn-primary">Back to Main-List</a><br><br>	
 		
-		<a th:href="@{/employee/addemployee}" class="btn btn-primary">Add Employee</a> <br><br>
+		<form th:action="@{/employee/search}" method="GET">
+			<input type="text" name="query" />
+			<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Search</button>
+		</form>
+		
+		<br>
+		<a th:href="@{/employee/addemployee}" class="btn btn-primary">Add Employee</a> 
+		
+		<!--  <a href="" id="sort" class="btn btn-primary btn-sm mb-3 mx-auto"> Sort Records </a> <br>-->
+		
+		<form th:action="@{/employee/sort}" method="GET">
+			<input type="text" name="query" />
+			<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Sort</button>
+		</form>
 		
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
@@ -54,6 +73,13 @@
 									<input type="hidden" name="employeeId" th:value="${employee.id}" />
 									<button type="submit" class="btn btn-danger btn-sm"
 										onclick="if (!(confirm('Are you sure you want to delete this ticket?'))) return false">Delete</button>
+								</form>
+							</div>
+							
+							<div class="col-small">
+								<form th:action="@{/employee/view}" method="POST">
+									<input type="hidden" name="employeeId" th:value="${employee.id}" />
+									<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">View</button>
 								</form>
 							</div>
 						
